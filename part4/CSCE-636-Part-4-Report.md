@@ -40,7 +40,7 @@ I used the [CASIA action database for recognition]([http://www.cbsr.ia.ac.cn/eng
 
 CASIA dataset contains eight different types of actions of single person from 3 different perspectives, such as walking, running, bending, jumping, crouching, fainting, wandering and punching a car.
 
-<img src="/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part4/pics/CASIA_action_database_single.jpg" alt="img" style="zoom:50%;" />
+<img src="pics/CASIA_action_database_single.jpg" alt="img" style="zoom:50%;" />
 
 
 
@@ -54,13 +54,13 @@ I compiled this project on my computer and processed all the videos in my datase
 
 A sample of the training dataset:
 
-![image-20200326000623756](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part4/pics/image-20200326000623756.png)
+![image-20200326000623756](pics/image-20200326000623756.png)
 
 
 
 A sample of the testing dataset:
 
-![image-20200326000726299](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part4/pics/image-20200326000726299.png)
+![image-20200326000726299](pics/image-20200326000726299.png)
 
 
 
@@ -80,4 +80,4 @@ $ python model_evaluate.py dataset/test/run/run_test_1.mp4
 
 Then, we will get the result like the following:
 
-![image-20200326004634509](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part4/pics/image-20200326004634509.png)
+![image-20200326004634509](pics/image-20200326004634509.png)
