@@ -34,7 +34,7 @@ First, we use a special kind of CNN called VGG16 as the first layer. Then do glo
 
 ### Dataset
 
-I used the [CASIA action database for recognition]([http://www.cbsr.ia.ac.cn/english/Action%20Databases%20EN.asp](http://www.cbsr.ia.ac.cn/english/Action Databases EN.asp)) as the training dataset and then I recorded some short clips of videos by myself which I have uploaded on my [Google Drive](https://drive.google.com/drive/folders/1uKkHqvemRo8D1EMF4H_iPHl0Hnjo3jYA?usp=sharing) as the testing dataset.
+I used the [CASIA action database for recognition](http://www.cbsr.ia.ac.cn/english/Action%20Databases%20EN.asp) as the training dataset and then I recorded some short clips of videos by myself which I have uploaded on my [Google Drive](https://drive.google.com/drive/folders/1uKkHqvemRo8D1EMF4H_iPHl0Hnjo3jYA?usp=sharing) as the testing dataset.
 
 
 
