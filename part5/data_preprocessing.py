@@ -69,19 +69,17 @@ def merge_dataset(data_1, label_1, data_2, label_2):
 train_data_other, train_label_other = parse_videos_in_folder('dataset/train/other', 0)
 train_data_slip, train_label_slip = parse_videos_in_folder('dataset/train/slip', 1)
 train_data, train_label = merge_dataset(train_data_other, train_label_other, train_data_slip, train_label_slip)
+del train_data_other, train_label_other, train_data_slip, train_label_slip
 
 valid_data_other, valid_label_other = parse_videos_in_folder('dataset/valid/other', 0)
 valid_data_slip, valid_label_slip = parse_videos_in_folder('dataset/valid/slip', 1)
 valid_data, valid_label = merge_dataset(valid_data_other, valid_label_other, valid_data_slip, valid_label_slip)
+del valid_data_other, valid_label_other, valid_data_slip, valid_label_slip
 
 test_data_other, test_label_other = parse_videos_in_folder('dataset/test/other', 0)
 test_data_slip, test_label_slip = parse_videos_in_folder('dataset/test/slip', 1)
 test_data, test_label = merge_dataset(test_data_other, test_label_other, test_data_slip, test_label_slip)
-
-print(train_data.shape, train_label.shape)
-print(valid_data.shape, valid_label.shape)
-print(test_data.shape, test_label.shape)
-
+del test_data_other, test_label_other, test_data_slip, test_label_slip
 
 
 # get the median length of video frame array of the training set
@@ -140,3 +138,9 @@ print(test_data.shape, test_label.shape)
 # save train set, validation set and test set as a .npy file
 np.save('train_data', train_data)
 np.save('train_label', train_label)
+
+np.save('valid_data', valid_data)
+np.save('valid_label', valid_label)
+
+np.save('test_data', test_data)
+np.save('test_label', test_label)
