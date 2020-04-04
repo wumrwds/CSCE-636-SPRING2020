@@ -126,7 +126,7 @@ I trained my model on these dataset and only got an accuracy of 0.53. It's only 
 
 ### 3.2. Self-made Action Database
 
-I records 161 videos in total including the following 8 actions: bend, crouch, faint, run, walk, jump, slip, squat. All these 161 videos are used as train set and validation set. For the test set, I asked some of my friends to record 54 videos in total and use these 54 videos as test set.
+I records 161 videos in total including the following 8 actions: bend, crouch, faint, run, walk, jump, slip, squat. All these 161 videos are used as train set and validation set. For the test set, I asked some of my friends to record  videos in total and use these 55 videos as test set.
 
 All videos are recorded in the horizontal view.
 
@@ -134,7 +134,17 @@ Train & validation set:
 
 ![OpenPose](pics/selfmade_train_slip.gif)
 
+
+
 Test set:
+
+![image-20200404144328478](pics/image-20200404144328478.png)
+
+
+
+All the datasets are uploaded on Google Drive: https://drive.google.com/open?id=1dkCMLELa6w3iiicB3t2Ltly62XSDEJsK
+
+![image-20200404144721987](pics/image-20200404144721987.png)
 
 
 

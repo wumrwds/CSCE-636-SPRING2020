@@ -9,9 +9,9 @@ Code:
 
 Datasets:
 
-1.  train set:
-2.  validation set:
-3.  test set:
+1.  train set: https://drive.google.com/open?id=1PxDLcmm7GovSTnUtqbP9m5cJpn1lsaWX
+2.  validation set: https://drive.google.com/open?id=1o3GvJaykLHddK5zlIAchh7jXgS5BOdpy
+3.  test set: https://drive.google.com/open?id=176J1Wr2eRr7p_6szhImLFMgVxgFpHqdl
 
 <br/>
 
