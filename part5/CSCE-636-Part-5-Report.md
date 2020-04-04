@@ -98,23 +98,67 @@ We can see VGG16 is a network with 16 layers and 138 million parameters. The VGG
 
 ## 3. Dataset
 
+### 3.1. Add Body Landmarks
 
+In order to make the human body more easy to be detected by our model and gain a better accuracy, we can use the open-source project [openpose](https://github.com/CMU-Perceptual-Computing-Lab/openpose) to add skeleton landmarks for our videos. 
 
-### 3.1. CASIA Action Database
+The processing result is shown below:
 
+![OpenPose](pics/openpose.gif)
 
+I compiled this project on my computer and processed all the videos in my dataset.
+
+### 3.2. CASIA Action Database
+
+Initially, I tried to use the [CASIA Action Database for Recognition](http://www.cbsr.ia.ac.cn/english/Action%20Databases%20EN.asp) as the train set and use some short clips of videos I record by myself as the testing dataset in the part 4. 
+
+CASIA dataset contains eight different types of actions of single person from 3 different perspectives, such as walking, running, bending, jumping, crouching, fainting, wandering and punching a car. 
+
+<img src="pics/CASIA_action_database_single.jpg" alt="CASIA" style="zoom: 33%;" />
+
+And I only used the videos of horizontal view for training. After using OpenPose to add body landmarks, I got some processed videos like below:
+
+![OpenPose](pics/CASIA_faint.gif)
+
+We can find a obvious problem is that the video resolution is low and in some frames the landmark data is not added correctly or even not added.
+
+I trained my model on these dataset and only got an accuracy of 0.53. It's only a little bit better than the random guess. So I decided to record some videos and use them as the dataset.
 
 ### 3.2. Self-made Action Database
 
+I records 161 videos in total including the following 8 actions: bend, crouch, faint, run, walk, jump, slip, squat. All these 161 videos are used as train set and validation set. For the test set, I asked some of my friends to record 54 videos in total and use these 54 videos as test set.
+
+All videos are recorded in the horizontal view.
+
+Train & validation set:
+
+![OpenPose](pics/selfmade_train_slip.gif)
+
+Test set:
 
 
-### 3.3. Data Preprocessing
 
-
+We can find a great improvement in the video resolution and body landmark accuracy in our new datasets compared to the CASIA dataset.
 
 <br/>
 
-## 4. Improvements & Results
+## 4. Implementation
+
+The implementation mainly consists of 3 parts: data preprocessing, model training and model evaluation. These 3 parts are implemented in the 3 python scripts `data_preprocessing.py`, `model_train.py`, `model_evaluate.py`. You can also see how they work
+
+### 4.1. Data Preprocessing
+
+
+
+### 4.2. Train Model
+
+
+
+### 4.3. Classification
+
+
+
+## 5. Improvements & Results
 
 1.  Data preprocessing
 
@@ -122,13 +166,13 @@ We can see VGG16 is a network with 16 layers and 138 million parameters. The VGG
 
 <br/>
 
-## Experience Summarization
+## 6. Experience Summarization
 
 
 
 <br/>
 
-## Future Work
+## 7. Future Work
 
 
 
