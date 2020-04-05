@@ -2,8 +2,8 @@
 
 Code: 
 
-1. Python Scripts: `data_preprocessing.py`, `model_train.py`, `model_evaluate.py` 
-2. Jupyter note: `model.ipynb`
+1. Python Scripts: [data_preprocessing.py](https://github.com/wumrwds/CSCE-636-SPRING2020/blob/master/part5/data_preprocessing.py), [model_train.py](https://github.com/wumrwds/CSCE-636-SPRING2020/blob/master/part5/model_train.py), [model_evaluate.py](https://github.com/wumrwds/CSCE-636-SPRING2020/blob/master/part5/model_evaluate.py)
+2. Jupyter note: [model.ipynb](https://github.com/wumrwds/CSCE-636-SPRING2020/blob/master/part5/model.ipynb)
 
 <br/>
 
@@ -15,7 +15,7 @@ Datasets:
 
 <br/>
 
-Trained Model: 
+Trained Model: https://drive.google.com/open?id=1W8DpfJjaCAvqHzLM1mJLt8BAgzY6f3Za
 
 <br/>
 
@@ -23,10 +23,7 @@ Report: [CSCE-636-Part-5-Report](https://github.com/wumrwds/CSCE-636-SPRING2020/
 
 <br/>
 
-Timeline label JSON file: 
-
-1.  true time label file: 
-2.  prediction time label file: 
+Timeline label JSON file: [timeLabel.json](https://github.com/wumrwds/CSCE-636-SPRING2020/blob/master/part5/timeLabel.json)
 
 <br/>
 
