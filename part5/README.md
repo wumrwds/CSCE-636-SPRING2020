@@ -27,9 +27,7 @@ Timeline label JSON file: [timeLabel.json](https://github.com/wumrwds/CSCE-636-S
 
 <br/>
 
-Testing demo video:
-
-
+Testing demo video: [CSCE 636 Project Part5 Test Demo](https://youtu.be/vndHJWDN4j0)
 
 
 
