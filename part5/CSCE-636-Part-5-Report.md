@@ -124,7 +124,7 @@ We can find a obvious problem is that the video resolution is low and in some fr
 
 I trained my model on these dataset and only got an accuracy of 0.53. It's only a little bit better than the random guess. So I decided to record some videos and use them as the dataset.
 
-### 3.2. Self-made Action Database
+### 3.2. Self-made Action Dataset
 
 I records 161 videos in total including the following 8 actions: bend, crouch, faint, run, walk, jump, slip, squat. All these 161 videos are used as train set and validation set. For the test set, I asked some of my friends to record  videos in total and use these 55 videos as test set.
 
@@ -154,39 +154,103 @@ We can find a great improvement in the video resolution and body landmark accura
 
 ## 4. Implementation
 
-The implementation mainly consists of 3 parts: data preprocessing, model training and model evaluation. These 3 parts are implemented in the 3 python scripts `data_preprocessing.py`, `model_train.py`, `model_evaluate.py`. You can also see how they work
+The implementation mainly consists of 3 parts: data preprocessing, model training and model evaluation. These 3 parts are implemented in the 3 python scripts `data_preprocessing.py`, `model_train.py`, `model_evaluate.py`. You can also see how they work in the jupyter notebook `model.ipynb`.
 
 ### 4.1. Data Preprocessing
 
+First, we will use the `cv2` library to convert video to frames. Then, in order to make all frame arrays have same length, we will get the median of the frame lengths and use this median to normalize all frame arrays to the same length. The normalization method is to truncate the excess frames in the two ends or pad the missing frames using the head & tail frame.
 
+On my self-made dataset, the shape of the normalized frame arrays is `(129, 136, 240, 320, 3)`, which represent number of samples, frames, rows, columns and channels, respectively.
 
 ### 4.2. Train Model
 
+At first, I use a smaller dataset to train and test my model on my personal computer. But soon I found that my computer always throws OOM exceptions during the VGG16 training process.
+
+Then I turn to use TAMU HPRC cluster, but it still doesn't work. Finally, I set up a GPU environment on Google Cloud and use remote jupyter connection to train and test my model.
+
+I mannually divide 20% of my train dataset as my validation dataset. And at first I set the binary cross entropy as the loss and use Adam as the optimizer with a learning rate of 0.01, since many posts on the Internet suggest to initialize lr to 0.01. Then I train 30 epochs with a batch_size of 4. 
+
+But I found that it still always throws OOM exceptions. And even I set the batch_size to 1, the memory still runs out. After I searched some posts on the Internet, I found that using Stochastic gradient descent (SGD) instead of Adam as the optimizer would cost less memory. 
+
+Then after I change my optimizer to SGD, it finally works. But the training accuracy is very close to 0.6, which means it's a little bit better than the random guess. After I tuned the learning rate to `0.00005`, the training & validation accuracy is finally close to 1.
+
+```python
+# set SGD optimizer and compile the model
+optimizer = SGD(lr=0.00005, decay = 1e-6, momentum=0.9, nesterov=True)
+model.compile(loss="binary_crossentropy",
+              optimizer=optimizer,
+              metrics=["accuracy"])
+
+# set checkpoint for saving models automatically in every epoch
+checkpoint = ModelCheckpoint('vgg16_lstm_model_{epoch:d}.h5', period=1)
+
+# set validation set and train the model
+history = model.fit(train_data, train_label, epochs=30, batch_size=3, 
+                    validation_data=(valid_data, valid_label), callbacks=[checkpoint])
+```
+
+And I set a checkpoint for recording models automatically in every epoch. Each epoch will be save in the file pattern`vgg16_lstm_model_{epoch}.h5`.
+
+The below figures shows the training & validation loss and accuracy: 
+
+![Train & Validation Loss](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_loss_without_dropout.png)
+
+![Train & Validation Accuracy](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_accuracy_without_dropout.png)
 
 
-### 4.3. Classification
 
+### 4.3. Evaluate Model
 
+I evaluate the models of each epochs on my test dataset. The best accuracy is about `0.69`.
 
-## 5. Improvements & Results
+And I wrote a script for using the best model to predict for the other new videos. Here's the demo of testing on new videos: [CSCE 636 Project Part5 Test Demo](https://youtu.be/vndHJWDN4j0).
 
-1.  Data preprocessing
+## 5. Improvements
 
+Since the performance on my train & validation dataset is good but it's not good on the test dataset. So one way to improve is to add some dropout layers in our model.
 
+I have tried to add dropout layers before and after VGG16 model and LSTM model, and also set different dropout rates. The best accuracy occurs when I add dropout layer after VGG16 model with the dropout rate `0.1`. 
+
+And I test the model with dropout layer on the test dataset. It gets the best accuracy of `0.71`, which is a little better than the model without dropout layer.
+
+The below figures shows the training & validation loss and accuracy: 
+
+![Train & Validation Loss](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_loss.png)
+
+![Train & Validation Accuracy](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_accuracy.png)
 
 <br/>
 
 ## 6. Experience Summarization
 
+From this project, I gained the following experiences:
 
+1.  When we need to use deep learning to solve a problem, it is best to first find a classic basic network structure as the basis of design, like VGG16, LSTM.
+2.  If train loss tends to remain the same and test loss also tends to remain the same, indicating that learning has encountered a bottleneck and needs to reduce the learning rate
+3.  train loss keeps dropping, test loss tends to be constant, indicating that the network is overfitting, we can consider trying dropout
+4.  For CNN, it is now generally believed that the smaller the convolution kernel, the smaller the required parameters and the amount of calculation when the same receptive field is reached. That means it's better to use multiple 3\*3 kernels instead of a 11\*11 kernel.
+5.  Compared with SGD + Momentum, the Adam optimizer will take up more memory, while the performance may not be much different.
+6.  Be patient while tuning parameters and training.
 
 <br/>
 
 ## 7. Future Work
 
+First, if I have more time and computing resources, we can tune our parameters more rigorously with a random search.
 
+Second, we can train our model on different datasets with more training samples.
+
+Third, we can try to capture multiple sequences of frames from each video with some stride between the start of each sequence and then use these multiple sequences to train our model.
+
+Fourth, we can also use datasets with different perspectives just like the CASIA Action Database. In other words, we can use 3 cameras to record a person's action from 3 different perspectives (horizontal view, angle view, top down view), and use the 3 videos of different perspectives to predict one action.
 
 <br/>
 
 ## References
 
+1.  [Long-term Recurrent Convolutional Networks for Visual Recognition and Description](https://arxiv.org/abs/1411.4389)
+2.  [A Torch Library for Action Recognition and Detection Using CNNs and LSTMs](http://cs231n.stanford.edu/reports/2016/pdfs/221_Report.pdf)
+3.  [Video-Classification-CNN-and-LSTM-](https://github.com/sagarvegad/Video-Classification-CNN-and-LSTM-)
+4.  [Research on human fall behavior using CNN and LSTM-based hybrid model](http://www.arocmag.com/article/02-2019-12-056.html)
+5.  [A practical theory for designing very deep convolutional neural networks](https://www.semanticscholar.org/paper/A-practical-theory-for-designing-very-deep-neural-Cao/79222fad9f671be142bd7e42cd785a2cb06a1d30)
+6.  [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/pdf/1409.1556.pdf)
