@@ -193,9 +193,9 @@ And I set a checkpoint for recording models automatically in every epoch. Each e
 
 The below figures shows the training & validation loss and accuracy: 
 
-![Train & Validation Loss](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_loss_without_dropout.png)
+![Train & Validation Loss](pics/train_loss_without_dropout.png)
 
-![Train & Validation Accuracy](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_accuracy_without_dropout.png)
+![Train & Validation Accuracy](pics/train_accuracy_without_dropout.png)
 
 
 
@@ -215,9 +215,9 @@ And I test the model with dropout layer on the test dataset. It gets the best ac
 
 The below figures shows the training & validation loss and accuracy: 
 
-![Train & Validation Loss](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_loss.png)
+![Train & Validation Loss](pics/train_loss.png)
 
-![Train & Validation Accuracy](/Users/minrengwu/Git/github/CSCE-636-SPRING2020/part5/pics/train_accuracy.png)
+![Train & Validation Accuracy](pics/train_accuracy.png)
 
 <br/>
 
@@ -249,7 +249,7 @@ Fourth, we can also use datasets with different perspectives just like the CASIA
 ## References
 
 1.  [Long-term Recurrent Convolutional Networks for Visual Recognition and Description](https://arxiv.org/abs/1411.4389)
-2.  [A Torch Library for Action Recognition and Detection Using CNNs and LSTMs](http://cs231n.stanford.edu/reports/2016/pdfs/221_Report.pdf)
+2.  [A Torch Library for Action Recognition and Detection Using CNNs and LSTMs](http://cs231n.stanford.edu/reports/2016/pdfs/221_Report.pdf)
 3.  [Video-Classification-CNN-and-LSTM-](https://github.com/sagarvegad/Video-Classification-CNN-and-LSTM-)
 4.  [Research on human fall behavior using CNN and LSTM-based hybrid model](http://www.arocmag.com/article/02-2019-12-056.html)
 5.  [A practical theory for designing very deep convolutional neural networks](https://www.semanticscholar.org/paper/A-practical-theory-for-designing-very-deep-neural-Cao/79222fad9f671be142bd7e42cd785a2cb06a1d30)
